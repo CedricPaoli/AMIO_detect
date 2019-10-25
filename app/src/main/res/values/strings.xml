@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Amio_detect</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Map</string>
+    <string name="title_notifications">Préférences</string>
+    <string name="activer_les_services">Activer les services</string>
+    <string name="activer_notifications">Activer notifications</string>
+    <string name="horaire_de_d_tection">Horaire de détection</string>
+    <string name="textview">TextView</string>
+    <string name="your_mail">your mail</string>
+    <string name="your_mail2">Your Mail</string>
 </resources>
