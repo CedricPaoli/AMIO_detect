@@ -6,13 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.amio_detect.R;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -30,6 +32,14 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        GetSensors getSensors = new GetSensors(getActivity(), this);
+        getSensors.execute("http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/temperature/last");
+
         return root;
+    }
+
+    void loadData(List list) {
+
     }
 }
