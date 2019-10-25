@@ -1,6 +1,10 @@
 package com.example.amio_detect;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        TextView t = (TextView) findViewById(R.id.textMin1);
+        //Log.e("message", t.getFontFeatureSettings());
+
+
     }
 
 }

@@ -48,20 +48,20 @@
         android:layout_height="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436" />
+        app:layout_constraintTop_toTopOf="@id/label_time"
+        app:layout_constraintVertical_bias="0.287" />
 
     <TextView
         android:id="@+id/label_time"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="272dp"
         android:text="@string/horaire_de_d_tection"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,27 +69,28 @@
         android:id="@+id/textMin1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="327dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/textview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rangeSeekbar1" />
 
     <TextView
         android:id="@+id/textMax1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="344dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="20dp"
         android:text="@string/textview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rangeSeekbar1" />
 
     <EditText
         android:id="@+id/yourMail"
         android:layout_width="286dp"
         android:layout_height="56dp"
-        android:layout_marginTop="435dp"
+        android:layout_marginTop="70dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/your_mail"
         android:inputType="textEmailAddress"
@@ -97,8 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="@id/rangeSeekbar1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
