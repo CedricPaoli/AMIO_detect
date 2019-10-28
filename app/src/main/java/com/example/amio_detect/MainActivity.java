@@ -1,8 +1,8 @@
 package com.example.amio_detect;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.SeekBar;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         TextView t = (TextView) findViewById(R.id.textMin1);
         //Log.e("message", t.getFontFeatureSettings());
 
+        //Toast.makeText(MainActivity.this, ((Switch) findViewById(R.id.switch1)).isChecked()+"", Toast.LENGTH_SHORT).show();
+
+        //setOnCheckedChangeListener();
 
     }
+
+
+
+
 }
