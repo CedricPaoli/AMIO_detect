@@ -32,5 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         TextView t = (TextView) findViewById(R.id.textMin1);
         //Log.e("message", t.getFontFeatureSettings());
+
+        //Toast.makeText(MainActivity.this, ((Switch) findViewById(R.id.switch1)).isChecked()+"", Toast.LENGTH_SHORT).show();
+
+        //setOnCheckedChangeListener();
+
     }
 }
