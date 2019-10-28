@@ -9,4 +9,6 @@
     <string name="textview">TextView</string>
     <string name="your_mail">your mail</string>
     <string name="your_mail2">Your Mail</string>
+    <string name="aucune_data_disponible">Aucune data disponible</string>
+    <string name="load">Chargement…</string>
 </resources>

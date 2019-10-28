@@ -1,6 +1,5 @@
 package com.example.amio_detect.ui.home;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,16 +13,13 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GetSensors extends AsyncTask<String , Void ,String> {
-    private List result = new ArrayList();
-    private final WeakReference<Activity> weakActivity;
-    private final HomeFragment fragment;
+    private ArrayList<Data> result = new ArrayList<>();
+    private final WeakReference<Context> weakActivity;
 
-    public GetSensors(Activity mainActivity, HomeFragment fragment) {
+    public GetSensors(Context mainActivity) {
         this.weakActivity = new WeakReference<>(mainActivity);
-        this.fragment = fragment;
     }
 
     /** Envoi de la requete GET en HTTP **/
@@ -49,16 +45,18 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
 
                 if (stream != null) {
                     MyParser parser = new MyParser();
-                    result = parser.readJsonStream(stream);
+                    this.result = parser.readJsonStream(stream);
                 }
-            } else {
-                Activity activity = weakActivity.get();
-
-                if (activity == null || activity.isFinishing() || activity.isDestroyed())
-                    return null;
 
                 Log.e("HTTP", "Success");
-                Toast.makeText(activity, "Erreur HTTP:" + responseCode, Toast.LENGTH_SHORT).show();
+            } else {
+                Context context = this.weakActivity.get();
+
+                if (context == null)
+                    return null;
+
+                Log.e("HTTP", "Error");
+                Toast.makeText(context, "Erreur HTTP: " + responseCode, Toast.LENGTH_SHORT).show();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,28 +68,27 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
         return null;
     }
 
-    /** If no connectivity, cancel task**/
+    /** Si le systeme n'est pas connecté à internet, on annule la connexion **/
     @Override
     protected void onPreExecute() {
-        Activity activity = weakActivity.get();
+        Context context = weakActivity.get();
 
-        if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
-            ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (context != null) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager == null ? null : connectivityManager.getActiveNetworkInfo();
 
             if (networkInfo == null || !networkInfo.isConnected() || (networkInfo.getType() != ConnectivityManager.TYPE_WIFI && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-                Toast.makeText(activity, "Erreur: pas de connexion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erreur: pas de connexion", Toast.LENGTH_SHORT).show();
                 cancel(true);
             }
         }
     }
 
+    /** On charge les données récupérées sur la page **/
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        Log.e("HTTP", "Success");
-
-        this.fragment.loadData(result);
+        HomeFragment.loadData(this.result);
     }
 }

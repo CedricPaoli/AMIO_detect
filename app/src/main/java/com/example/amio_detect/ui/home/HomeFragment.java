@@ -7,39 +7,53 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amio_detect.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    private AppCompatActivity activity = (AppCompatActivity) getActivity();
+    private ArrayList<Data> listData = new ArrayList<>();
+    private static RecycleAdapter recycleAdapter;
+    private static TextView noItem;
+    private static TextView load;
 
-    private HomeViewModel homeViewModel;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        ConstraintLayout constraintLayout = root.findViewById(R.id.constraintLayout);
 
-        GetSensors getSensors = new GetSensors(getActivity(), this);
-        getSensors.execute("http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/temperature/last");
+        noItem = root.findViewById(R.id.noItem);
+        load = root.findViewById(R.id.load);
+        load.setVisibility(View.VISIBLE);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.activity));
+        recyclerView.setFocusable(false);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
+        constraintLayout.requestFocus();
+
+        recycleAdapter = new RecycleAdapter(this.listData);
+        recyclerView.setAdapter(recycleAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        GetSensors getSensors = new GetSensors(this.activity);
+        getSensors.execute("http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/light1/last");
 
         return root;
     }
 
-    void loadData(List list) {
+    static void loadData(ArrayList<Data> list) {
+        load.setVisibility(View.INVISIBLE);
 
+        if (recycleAdapter.updateList(list) == 0)
+            noItem.setVisibility(View.VISIBLE);
+        else noItem.setVisibility(View.INVISIBLE);
     }
 }

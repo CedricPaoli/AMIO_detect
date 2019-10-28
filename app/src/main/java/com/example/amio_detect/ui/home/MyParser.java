@@ -8,35 +8,36 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
 class MyParser {
-    private List<Data> data_list;
+    private ArrayList<Data> dataList;
 
     MyParser() {
-        data_list = new ArrayList<>();
+        dataList = new ArrayList<>();
     }
 
-    List readJsonStream(InputStream in) {
-        Log.d("MainActivity", "readJsonStreamOk");
-
+    ArrayList<Data> readJsonStream(InputStream in) {
         try (JsonReader reader = new JsonReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
             reader.beginObject();
+
             if (reader.hasNext()) {
                 if (reader.nextName().equals("data")) {
                     reader.beginArray();
 
                     while (reader.hasNext())
-                        data_list.add(readData(reader));
+                        dataList.add(readData(reader));
 
                     reader.endArray();
                 }
             }
 
             reader.endObject();
-            return data_list;
+            Log.d("MainActivity", "readJsonStreamOk");
+
+            return dataList;
         } catch (IOException e) {
             Log.d("MainActivity", "readJsonStreamError");
+
             return null;
         }
     }
@@ -44,12 +45,11 @@ class MyParser {
     private Data readData(JsonReader reader) throws IOException {
         Long timestamp = null;
         String label = null;
-        Double light_value = null;
+        Double value = null;
         String mote = null;
 
-        Log.d("MainActivity", "readJsonStreamError");
-
         reader.beginObject();
+
         while (reader.hasNext()) {
             String name = reader.nextName();
 
@@ -60,8 +60,8 @@ class MyParser {
                 case "label":
                     label = reader.nextString();
                     break;
-                case "light_value":
-                    light_value = reader.nextDouble();
+                case "value":
+                    value = reader.nextDouble();
                     break;
                 case "mote":
                     mote = reader.nextString();
@@ -73,6 +73,6 @@ class MyParser {
 
         reader.endObject();
 
-        return new Data(timestamp, label, light_value, mote);
+        return new Data(timestamp, label, value, mote);
     }
 }
