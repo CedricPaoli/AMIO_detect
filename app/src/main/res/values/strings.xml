@@ -11,4 +11,17 @@
     <string name="your_mail2">Your Mail</string>
     <string name="aucune_data_disponible">Aucune data disponible</string>
     <string name="load">Chargement…</string>
+    <string name="switch_description">Turn this option on or off</string>
+    <string name="monday">Lundi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
+    <string name="starting">Début de la surveillance</string>
+    <string name="starting_description">Début de l\'heure de surveillance en semaine</string>
+    <string name="stopping_description">Fin de l\'heure de surveillance en semaine</string>
+    <string name="stopping">Heure de fin de la surveillance</string>
+    <string name="we_description">La surveillance est de 24/24h le week-end</string>
 </resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <PreferenceCategory android:title="Services">
+        <SwitchPreferenceCompat
+            android:id="@+id/services"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="services"
+            android:summary="@string/switch_description"
+            app:title="@string/activer_les_services" />
+
+        <SwitchPreferenceCompat
+            android:id="@+id/notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="notifications"
+            android:summary="@string/switch_description"
+            app:title="@string/activer_notifications" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Horaires de surveillance en semaine">
+
+        <SeekBarPreference
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="start"
+            android:summary="@string/starting_description"
+            app:title="@string/starting"
+            android:max="24"
+            android:min="0" />
+
+        <SeekBarPreference
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="stop"
+            android:summary="@string/stopping_description"
+            app:title="@string/stopping"
+            android:max="24"
+            android:min="0"  />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Définition des jours de week-end"
+        android:summary="@string/we_description">
+
+        <CheckBoxPreference
+            android:id="@+id/monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="monday"
+            app:title="@string/monday" />
+
+        <CheckBoxPreference
+            android:id="@+id/tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="tuesday"
+            app:title="@string/tuesday" />
+
+        <CheckBoxPreference
+            android:id="@+id/wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="wednesday"
+            app:title="@string/wednesday" />
+
+        <CheckBoxPreference
+            android:id="@+id/thursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="thursday"
+            app:title="@string/thursday" />
+
+        <CheckBoxPreference
+            android:id="@+id/friday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="friday"
+            app:title="@string/friday" />
+
+        <CheckBoxPreference
+            android:id="@+id/saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="saturday"
+            app:title="@string/saturday" />
+
+        <CheckBoxPreference
+            android:id="@+id/sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="sunday"
+            app:title="@string/sunday" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
