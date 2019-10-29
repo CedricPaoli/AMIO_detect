@@ -1,6 +1,11 @@
-package com.example.amio_detect.ui.home;
+package com.example.amio_detect.utils;
 
 import androidx.annotation.NonNull;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Data {
     private Long timestamp;
@@ -15,12 +20,24 @@ public class Data {
         this.mote = mote;
     }
 
-    String getMote() {
+    public String getMote() {
         return "Mote: " + this.mote;
     }
 
-    String getLight() {
+    public String getLight() {
         return "Lumiere: " + this.value;
+    }
+
+    public String getDate() {
+        Timestamp ts = new Timestamp(this.timestamp);
+        Date date = new Date(ts.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm:ss", Locale.FRANCE);
+
+        return "Dernière acquisition: " + simpleDateFormat.format(date);
+    }
+
+    public boolean isOn() {
+        return this.value > 250;
     }
 
     @NonNull

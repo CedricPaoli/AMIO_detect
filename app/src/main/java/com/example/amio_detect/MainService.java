@@ -1,4 +1,4 @@
-package com.example.amio_detect.ui;
+package com.example.amio_detect;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.amio_detect.ui.home.GetSensors;
+import com.example.amio_detect.utils.GetSensors;
 
 import java.util.Timer;
 import java.util.TimerTask;

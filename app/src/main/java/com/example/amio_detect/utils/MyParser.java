@@ -1,4 +1,4 @@
-package com.example.amio_detect.ui.home;
+package com.example.amio_detect.utils;
 
 import android.util.JsonReader;
 import android.util.Log;

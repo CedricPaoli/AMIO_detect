@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amio_detect.R;
+import com.example.amio_detect.utils.Data;
+import com.example.amio_detect.utils.GetSensors;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    static void loadData(ArrayList<Data> list) {
+    public static void loadData(ArrayList<Data> list) {
         load.setVisibility(View.INVISIBLE);
 
         if (recycleAdapter.updateList(list) == 0)

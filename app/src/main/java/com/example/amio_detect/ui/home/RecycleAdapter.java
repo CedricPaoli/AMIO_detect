@@ -1,5 +1,6 @@
 package com.example.amio_detect.ui.home;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amio_detect.R;
+import com.example.amio_detect.utils.Data;
 
 import java.util.ArrayList;
 
@@ -21,13 +23,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
     /** Structure de chaque item de la liste RecyclerView **/
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView moteLabel, light;
+        TextView moteLabel, light, date;
 
         MyViewHolder(View moteLabel) {
             super(moteLabel);
 
             this.moteLabel = itemView.findViewById(R.id.mote);
             this.light = itemView.findViewById(R.id.light);
+            this.date = itemView.findViewById(R.id.date);
         }
     }
 
@@ -42,8 +45,27 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int position) {
-        viewHolder.moteLabel.setText(this.listData.get(position).getMote());
-        viewHolder.light.setText(this.listData.get(position).getLight());
+        Data data = this.listData.get(position);
+        boolean isOn = data.isOn();
+        TextView moteLabel = viewHolder.moteLabel;
+        TextView light = viewHolder.light;
+        TextView date = viewHolder.date;
+        String isOnString = data.isOn()?"allumé":"éteint";
+        String lightString = data.getLight() + "(" + isOnString + ")";
+
+        moteLabel.setText(data.getMote());
+        light.setText(lightString);
+        date.setText(data.getDate());
+
+        if(isOn) {
+            moteLabel.setTextColor(Color.GREEN);
+            light.setTextColor(Color.GREEN);
+            date.setTextColor(Color.GREEN);
+        } else {
+            moteLabel.setTextColor(Color.RED);
+            light.setTextColor(Color.RED);
+            date.setTextColor(Color.RED);
+        }
     }
 
     int updateList(ArrayList<Data> listData) {
@@ -52,7 +74,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         this.notifyDataSetChanged();
 
         System.out.println(this.listData.toString());
-        System.out.println(this.getItemCount());
 
         return this.getItemCount();
     }

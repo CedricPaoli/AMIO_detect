@@ -1,4 +1,4 @@
-package com.example.amio_detect.ui.home;
+package com.example.amio_detect.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.amio_detect.ui.home.HomeFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
