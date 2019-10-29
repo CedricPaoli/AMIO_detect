@@ -29,24 +29,22 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/week_hours_cat"
-        app:iconSpaceReserved="false">
+    <PreferenceCategory android:title="Horaires de surveillance en semaine">
 
         <SeekBarPreference
             android:id="@+id/start"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="start"
             android:summary="@string/starting_description"
             app:title="@string/starting"
             android:max="24"
             android:min="0"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"/>
 
         <SeekBarPreference
             android:id="@+id/stop"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="stop"
             android:summary="@string/stopping_description"
@@ -152,7 +150,10 @@
             android:key="sunday"
             app:title="@string/sunday"
             app:iconSpaceReserved="false" />
+            android:min="0"  />
 
     </PreferenceCategory>
+
+
 
 </PreferenceScreen>
