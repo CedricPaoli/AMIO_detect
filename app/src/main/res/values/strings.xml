@@ -24,4 +24,9 @@
     <string name="stopping_description">Fin de l\'heure de surveillance en semaine</string>
     <string name="stopping">Heure de fin de la surveillance</string>
     <string name="we_description">La surveillance est de 24/24h le week-end</string>
+    <string name="week_hours_cat">Horaires de surveillance en semaine</string>
+    <string name="services">Services</string>
+    <string name="end_hour_cat">Horaires de surveillance en week-end</string>
+    <string name="stopping_description_we">Fin de l\'heure de surveillance en week-end</string>
+    <string name="starting_description_we">Début de l\'heure de surveillance en week-end</string>
 </resources>

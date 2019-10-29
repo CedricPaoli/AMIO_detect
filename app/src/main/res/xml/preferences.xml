@@ -1,111 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <PreferenceCategory android:title="Services">
+    <PreferenceCategory
+        android:title="@string/services"
+        app:iconSpaceReserved="false">
+
         <SwitchPreferenceCompat
             android:id="@+id/services"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:key="services"
             android:summary="@string/switch_description"
-            app:title="@string/activer_les_services" />
+            app:title="@string/activer_les_services"
+            app:iconSpaceReserved="false"/>
 
         <SwitchPreferenceCompat
             android:id="@+id/notifications"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="true"
             android:key="notifications"
             android:summary="@string/switch_description"
-            app:title="@string/activer_notifications" />
+            app:title="@string/activer_notifications"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Horaires de surveillance en semaine">
+    <PreferenceCategory
+        android:title="@string/week_hours_cat"
+        app:iconSpaceReserved="false">
 
         <SeekBarPreference
             android:id="@+id/start"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:key="start"
             android:summary="@string/starting_description"
             app:title="@string/starting"
             android:max="24"
-            android:min="0" />
+            android:min="0"
+            app:iconSpaceReserved="false" />
 
         <SeekBarPreference
             android:id="@+id/stop"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:key="stop"
             android:summary="@string/stopping_description"
             app:title="@string/stopping"
             android:max="24"
-            android:min="0"  />
+            android:min="0"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Définition des jours de week-end"
-        android:summary="@string/we_description">
+    <PreferenceCategory
+        android:title="@string/end_hour_cat"
+        app:iconSpaceReserved="false">
+
+        <SeekBarPreference
+            android:id="@+id/start_we"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:key="start_we"
+            android:summary="@string/starting_description_we"
+            app:title="@string/starting"
+            android:max="24"
+            android:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:id="@+id/stop_we"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:key="stop_we"
+            android:summary="@string/stopping_description_we"
+            app:title="@string/stopping"
+            android:max="24"
+            android:min="0"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Définition des jours de week-end"
+        android:summary="@string/we_description"
+        app:iconSpaceReserved="false">
 
         <CheckBoxPreference
             android:id="@+id/monday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="monday"
-            app:title="@string/monday" />
+            app:title="@string/monday"
+            app:iconSpaceReserved="false"/>
 
         <CheckBoxPreference
             android:id="@+id/tuesday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="tuesday"
-            app:title="@string/tuesday" />
+            app:title="@string/tuesday"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:id="@+id/wednesday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="wednesday"
-            app:title="@string/wednesday" />
+            app:title="@string/wednesday"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:id="@+id/thursday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="thursday"
-            app:title="@string/thursday" />
+            app:title="@string/thursday"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:id="@+id/friday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="friday"
-            app:title="@string/friday" />
+            app:title="@string/friday"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:id="@+id/saturday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="true"
             android:key="saturday"
-            app:title="@string/saturday" />
+            app:title="@string/saturday"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:id="@+id/sunday"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultValue="true"
             android:key="sunday"
-            app:title="@string/sunday" />
+            app:title="@string/sunday"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
