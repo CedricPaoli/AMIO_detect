@@ -29,4 +29,9 @@
     <string name="end_hour_cat">Horaires de surveillance en week-end</string>
     <string name="stopping_description_we">Fin de l\'heure de surveillance en week-end</string>
     <string name="starting_description_we">Début de l\'heure de surveillance en week-end</string>
+    <string name="map">map</string>
+    <string name="lamp">lamp</string>
+    <string name="week_def">Définition des jours de week-end</string>
+    <string name="contact">Information de contact</string>
+    <string name="contact_description">Vos information de contact nous permettent de vous prévenir en cas d\'incident</string>
 </resources>
