@@ -7,8 +7,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -43,15 +41,16 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         IntentFilter mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(LIST_RECEIVER);
 
+        sendEmail();
         this.startService(new Intent(this, MainService.class)); //A enlever
     }
 
     private BroadcastReceiver batchProcessReceiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
-        if (Objects.equals(intent.getAction(), LIST_RECEIVER)) {
-            ArrayList<? extends Data> list = intent.getParcelableArrayListExtra("dataList");
-            MainActivity.this.activityListener.reloadRecycle((ArrayList<Data>) list);
-        }
+            if (Objects.equals(intent.getAction(), LIST_RECEIVER)) {
+                ArrayList<? extends Data> list = intent.getParcelableArrayListExtra("dataList");
+                MainActivity.this.activityListener.reloadRecycle((ArrayList<Data>) list);
+            }
         }
     };
 
@@ -77,9 +76,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     protected void sendEmail() {
         Log.i("Send email", "sending mail");
-        SharedPreferences sharedPref =
-                PreferenceManager
-                        .getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
             String to = "";
