@@ -150,10 +150,7 @@
             android:key="sunday"
             app:title="@string/sunday"
             app:iconSpaceReserved="false" />
-            android:min="0"  />
+        android:min="0"  />
 
     </PreferenceCategory>
-
-
-
 </PreferenceScreen>

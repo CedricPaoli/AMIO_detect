@@ -13,9 +13,22 @@ import com.example.amio_detect.R;
 import com.example.amio_detect.utils.Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
     private ArrayList<Data> listData;
+    private Map<String,String> motePlaces = new HashMap<String, String>(){{
+        this.put("151.105", "2-01");
+        this.put("97.145", "2-02");
+        this.put("153.111", "2-05");
+        this.put("9.138", "2-06");
+        this.put("53.105", "2-07");
+        this.put("32.131", "2-08");
+        this.put("111.130", "2-09");
+        this.put("120.99", "2-10");
+        this.put("200.124", "2-11");
+    }};
 
     RecycleAdapter(ArrayList<Data> listData) {
         this.listData = listData;
@@ -51,9 +64,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         TextView light = viewHolder.light;
         TextView date = viewHolder.date;
         String isOnString = data.isOn()?"allumé":"éteint";
-        String lightString = data.getLight() + "(" + isOnString + ")";
+        String lightString = data.getLight() + " (" + isOnString + ")";
+        String moteString = data.getMote() + " (Salle: " + motePlaces.get(data.getMoteName()) + ")";
 
-        moteLabel.setText(data.getMote());
+        moteLabel.setText(moteString);
         light.setText(lightString);
         date.setText(data.getDate());
 

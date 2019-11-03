@@ -3,16 +3,18 @@ package com.example.amio_detect;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.content.SharedPreferences;
+
+import androidx.preference.PreferenceManager;
+
+import com.example.amio_detect.ui.notifications.NotificationsFragment;
 
 public class DataReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Log.d("DataReceiver", "DataReceiver BOOT_COMPLETED");
-        }
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
-        Log.e("DataReceiver", "Received");
-        context.startService(new Intent(context, MainService.class));
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) && sharedPref.getBoolean(NotificationsFragment.SERVICES_PREF, false))
+            context.startService(new Intent(context, MainService.class));
     }
 }

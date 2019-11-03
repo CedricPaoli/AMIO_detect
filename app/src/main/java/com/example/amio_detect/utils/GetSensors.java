@@ -1,5 +1,6 @@
 package com.example.amio_detect.utils;
 
+import android.app.Service;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -7,7 +8,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.amio_detect.ui.home.HomeFragment;
+import com.example.amio_detect.MainActivity;
+import com.example.amio_detect.MainService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,10 +20,12 @@ import java.util.ArrayList;
 
 public class GetSensors extends AsyncTask<String , Void ,String> {
     private ArrayList<Data> result = new ArrayList<>();
-    private final WeakReference<Context> weakActivity;
+    private final WeakReference<Context> weakContext;
+    private final WeakReference<Service> weakService;
 
-    public GetSensors(Context mainActivity) {
-        this.weakActivity = new WeakReference<>(mainActivity);
+    public GetSensors(Context context, Service mainService) {
+        this.weakContext = new WeakReference<>(context);
+        this.weakService = new WeakReference<>(mainService);
     }
 
     /** Envoi de la requete GET en HTTP **/
@@ -30,6 +34,7 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
         URL url;
         HttpURLConnection urlConnection = null;
         InputStream stream;
+        int responseCode = 0;
 
         try {
             url = new URL(strings[0]);
@@ -40,7 +45,7 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
             urlConnection.setDoInput(true);
             urlConnection.connect();
 
-            int responseCode = urlConnection.getResponseCode();
+            responseCode = urlConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 stream = urlConnection.getInputStream();
@@ -51,17 +56,17 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
                 }
 
                 Log.e("HTTP", "Success");
-            } else {
-                Context context = this.weakActivity.get();
-
-                if (context == null)
-                    return null;
-
-                Log.e("HTTP", "Error");
-                Toast.makeText(context, "Erreur HTTP: " + responseCode, Toast.LENGTH_SHORT).show();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Context context = this.weakContext.get();
+
+            if (context == null)
+                return null;
+
+            Log.e("HTTP", "Error");
+
+            if(context instanceof MainActivity)
+                Toast.makeText(context, "Erreur HTTP: " + responseCode, Toast.LENGTH_SHORT).show();
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();
@@ -73,14 +78,16 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
     /** Si le systeme n'est pas connecté à internet, on annule la connexion **/
     @Override
     protected void onPreExecute() {
-        Context context = weakActivity.get();
+        Context context = this.weakContext.get();
 
         if (context != null) {
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager == null ? null : connectivityManager.getActiveNetworkInfo();
 
             if (networkInfo == null || !networkInfo.isConnected() || (networkInfo.getType() != ConnectivityManager.TYPE_WIFI && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-                Toast.makeText(context, "Erreur: pas de connexion", Toast.LENGTH_SHORT).show();
+                if(context instanceof MainActivity)
+                    Toast.makeText(context, "Erreur: pas de connexion", Toast.LENGTH_SHORT).show();
+
                 cancel(true);
             }
         }
@@ -91,6 +98,13 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        HomeFragment.loadData(this.result);
+        Context context = weakContext.get();
+        Context service = weakService.get();
+
+        if(context instanceof MainActivity)
+            ((MainActivity) context).updateRecyclerView(this.result);
+
+        if(service != null)
+            ((MainService) service).updateList(this.result);
     }
 }
