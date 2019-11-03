@@ -29,11 +29,29 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Horaires de surveillance en semaine">
+    <PreferenceCategory
+        android:title="@string/contact"
+        android:summary="@string/contact_description"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:id="@+id/your_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="your_mail"
+            app:title="@string/your_mail"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/week_hours_cat"
+        app:iconSpaceReserved="false">
 
         <SeekBarPreference
             android:id="@+id/start"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:key="start"
             android:summary="@string/starting_description"
@@ -44,7 +62,7 @@
 
         <SeekBarPreference
             android:id="@+id/stop"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:key="stop"
             android:summary="@string/stopping_description"
@@ -84,7 +102,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Définition des jours de week-end"
+        android:title="@string/week_def"
         android:summary="@string/we_description"
         app:iconSpaceReserved="false">
 

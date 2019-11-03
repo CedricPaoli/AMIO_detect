@@ -4,13 +4,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.example.amio_detect.utils.AsyncResponse;
 import com.example.amio_detect.utils.Data;
@@ -68,5 +73,25 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     protected void onResume() {
         registerReceiver(batchProcessReceiver, new IntentFilter(LIST_RECEIVER));
         super.onResume();
+    }
+
+    protected void sendEmail() {
+        Log.i("Send email", "sending mail");
+        SharedPreferences sharedPref =
+                PreferenceManager
+                        .getDefaultSharedPreferences(this);
+
+        try {
+            String to = "";
+            to = sharedPref.getString("your_mail",to);
+            GMailSender sender = new GMailSender("no.reply.amio@gmail.com", "TNCY@2019");
+            sender.sendMail("Test Mail",
+                    "This is Body",
+                    "no.reply.amio@gmail.com",
+                    to);
+            Log.i("SendMail", "mail sent to : " + to + " || ");
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
     }
 }
