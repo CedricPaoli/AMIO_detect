@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -41,8 +42,18 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         IntentFilter mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(LIST_RECEIVER);
 
-        sendEmail();
-        this.startService(new Intent(this, MainService.class)); //A enlever
+        String to = "";
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        to = sharedPref.getString("your_mail",to);
+
+        TextView m = findViewById(R.id.your_mail);
+        //m.setText(to);
+
+        Log.e("mail_test",to);
+        Log.e("mail_test", m+"");
+
+        //sendEmail();
+        //this.startService(new Intent(this, MainService.class)); //A enlever
     }
 
     private BroadcastReceiver batchProcessReceiver = new BroadcastReceiver() {
@@ -72,23 +83,5 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     protected void onResume() {
         registerReceiver(batchProcessReceiver, new IntentFilter(LIST_RECEIVER));
         super.onResume();
-    }
-
-    protected void sendEmail() {
-        Log.i("Send email", "sending mail");
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-        try {
-            String to = "";
-            to = sharedPref.getString("your_mail",to);
-            GMailSender sender = new GMailSender("no.reply.amio@gmail.com", "TNCY@2019");
-            sender.sendMail("Test Mail",
-                    "This is Body",
-                    "no.reply.amio@gmail.com",
-                    to);
-            Log.i("SendMail", "mail sent to : " + to + " || ");
-        } catch (Exception e) {
-            Log.e("SendMail", e.getMessage(), e);
-        }
     }
 }

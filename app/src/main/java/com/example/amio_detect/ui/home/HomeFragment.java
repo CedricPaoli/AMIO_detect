@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amio_detect.MainActivity;
 import com.example.amio_detect.R;
-import com.example.amio_detect.ui.notifications.NotificationsFragment;
+import com.example.amio_detect.ui.prefs.PrefsFragment;
 import com.example.amio_detect.utils.AsyncResponse;
 import com.example.amio_detect.utils.Data;
 import com.example.amio_detect.utils.GetSensors;
@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment implements ListenFromActivity, AsyncR
         if(firstOpening) {
             firstOpening = false;
 
-            if(!sharedPref.getBoolean(NotificationsFragment.SERVICES_PREF, false))
+            if(!sharedPref.getBoolean(PrefsFragment.SERVICES_PREF, false))
                 this.getData(activity);
         } else this.getData(activity);
 

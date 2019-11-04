@@ -38,7 +38,7 @@
             android:id="@+id/your_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
+            android:defaultValue="example@xyz.com"
             android:key="your_mail"
             app:title="@string/your_mail"
             app:iconSpaceReserved="false" />
@@ -51,24 +51,56 @@
 
         <SeekBarPreference
             android:id="@+id/start"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="start"
             android:summary="@string/starting_description"
             app:title="@string/starting"
+            app:showSeekBarValue="true"
             android:max="24"
-            android:min="0"
+            android:defaultValue="19"
             app:iconSpaceReserved="false"/>
 
         <SeekBarPreference
             android:id="@+id/stop"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="stop"
             android:summary="@string/stopping_description"
             app:title="@string/stopping"
+            app:showSeekBarValue="true"
             android:max="24"
-            android:min="0"
+            android:defaultValue="23"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/week_hours_mail"
+        app:iconSpaceReserved="false">
+
+        <SeekBarPreference
+            android:id="@+id/start_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="start_mail"
+            android:summary="@string/starting_mail_description"
+            app:title="@string/starting"
+            app:showSeekBarValue="true"
+            android:max="24"
+            android:defaultValue="23"
+            app:iconSpaceReserved="false"/>
+
+        <SeekBarPreference
+            android:id="@+id/stop_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="stop_mail"
+            android:summary="@string/stopping_mail_description"
+            app:title="@string/stopping"
+            app:showSeekBarValue="true"
+            android:max="24"
+            android:defaultValue="6"
             app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
@@ -84,8 +116,9 @@
             android:key="start_we"
             android:summary="@string/starting_description_we"
             app:title="@string/starting"
+            app:showSeekBarValue="true"
             android:max="24"
-            android:min="0"
+            android:defaultValue="19"
             app:iconSpaceReserved="false" />
 
         <SeekBarPreference
@@ -96,7 +129,8 @@
             android:summary="@string/stopping_description_we"
             app:title="@string/stopping"
             android:max="24"
-            android:min="0"
+            app:showSeekBarValue="true"
+            android:defaultValue="23"
             app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
