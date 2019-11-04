@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amio_detect.MainActivity;
 import com.example.amio_detect.R;
+import com.example.amio_detect.responseInterface.AsyncResponse;
+import com.example.amio_detect.responseInterface.ListenFromActivity;
 import com.example.amio_detect.ui.prefs.PrefsFragment;
-import com.example.amio_detect.utils.AsyncResponse;
 import com.example.amio_detect.utils.Data;
 import com.example.amio_detect.utils.GetSensors;
-import com.example.amio_detect.utils.ListenFromActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;

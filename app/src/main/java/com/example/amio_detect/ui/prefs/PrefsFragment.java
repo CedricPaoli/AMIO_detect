@@ -20,20 +20,17 @@ public class PrefsFragment extends PreferenceFragmentCompat {
     public static final String STOP_PREF = "stop";
     public static final String START_WE_PREF = "start_we";
     public static final String STOP_WE_PREF = "stop_we";
+    public static final String START_MAIL_PREF = "start_mail";
+    public static final String STOP_MAIL_PREF = "stop_mail";
     public static final String[] WEEK = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        Preference t = findPreference("your_mail");
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String to = "";
-        to = sharedPref.getString("your_mail",to);
-        t.setTitle(to);
-        Preference start = findPreference("start");
-
-
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getContext()));
+        String to = sharedPref.getString("your_mail", "");
+        Objects.requireNonNull(findPreference("your_mail")).setTitle(to);
     }
 
     @Override

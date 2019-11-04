@@ -19,6 +19,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.amio_detect.ui.prefs.PrefsFragment;
 import com.example.amio_detect.utils.Data;
+import com.example.amio_detect.utils.GMailSender;
 import com.example.amio_detect.utils.GetSensors;
 
 import java.util.ArrayList;
@@ -72,18 +73,24 @@ public class MainService extends Service {
         this.sendNotification(list);
     }
 
-    public void sendNotification(ArrayList<Data> list) {
+    private void sendNotification(ArrayList<Data> list) {
         Calendar c = Calendar.getInstance();
         ArrayList<Integer> weekday = new ArrayList<>();
         ArrayList<String> moteActivated = new ArrayList<>();
+        ArrayList<String> moteMailActivated = new ArrayList<>();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getApplicationContext()));
         int from = sharedPref.getInt(PrefsFragment.START_PREF, 19);
         int to = sharedPref.getInt(PrefsFragment.STOP_PREF, 23);
 
+        int fromMail = sharedPref.getInt(PrefsFragment.START_MAIL_PREF, 23);
+        int toMail = sharedPref.getInt(PrefsFragment.STOP_MAIL_PREF, 6);
+
+        int fromMailWe = sharedPref.getInt(PrefsFragment.START_WE_PREF, 19);
+        int toMailWe = sharedPref.getInt(PrefsFragment.STOP_WE_PREF, 23);
+
         c.setTime(new Date());
 
         int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
-        boolean isBetween = (to > from && t >= from && t <= to) || (to < from && (t >= from || t <= to));
 
         for (int i = 0; i < PrefsFragment.WEEK.length; i++)
             if (!sharedPref.getBoolean(PrefsFragment.WEEK[i], false))
@@ -98,8 +105,10 @@ public class MainService extends Service {
                 if (!listMotesLit.containsKey(moteName) && mote.isOn()) {
                     c.setTime(mote.getRawDate());
 
-                    if (weekday.contains(c.get(Calendar.DAY_OF_WEEK)) && isBetween)
+                    if (weekday.contains(c.get(Calendar.DAY_OF_WEEK)) && this.isBetween(from, to, t))
                         moteActivated.add(moteName);
+                    else if(this.isBetween(fromMail, toMail, t) || this.isBetween(fromMailWe, toMailWe, t))
+                        moteMailActivated.add(moteName);
 
                     listMotesLit.put(moteName, mote);
                 } else if (listMotesLit.containsKey(mote.getMote()) && !mote.isOn()) {
@@ -116,11 +125,24 @@ public class MainService extends Service {
                     moteActivatedString = moteActivatedString.concat(", " + moteActivated.get(i));
 
             this.sendNotification(this, moteActivatedString);
-            this.sendEmail( moteActivatedString);
+        }
+
+        if(moteMailActivated.size() > 0) {
+            String moteMailActivatedString = moteActivated.get(0);
+
+            if (moteActivated.size() > 1)
+                for (int i = 1; i < moteActivated.size(); i++)
+                    moteMailActivatedString = moteMailActivatedString.concat(", " + moteMailActivated.get(i));
+
+            this.sendEmail( moteMailActivatedString);
         }
     }
 
-    public void sendNotification(Context context, String moteLabels) {
+    private boolean isBetween(int from, int to, int time) {
+        return (from < to && from <= time && time <= to) || (from > to && (from <= time || time <= to));
+    }
+
+    private void sendNotification(Context context, String moteLabels) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("amio_detect_1", "amio_detect", NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription("Amio detect channnel");
@@ -141,7 +163,7 @@ public class MainService extends Service {
         NotificationManagerCompat.from(context).notify((int)(System.currentTimeMillis()/1000), builder.build());
     }
 
-    protected void sendEmail(String moteLabels) {
+    private void sendEmail(String moteLabels) {
         Log.i("Send email", "sending mail");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 

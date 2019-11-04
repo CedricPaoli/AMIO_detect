@@ -4,21 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.preference.PreferenceManager;
 
-import com.example.amio_detect.utils.AsyncResponse;
+import com.example.amio_detect.responseInterface.AsyncResponse;
+import com.example.amio_detect.responseInterface.ListenFromActivity;
 import com.example.amio_detect.utils.Data;
-import com.example.amio_detect.utils.ListenFromActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -41,16 +37,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
         IntentFilter mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(LIST_RECEIVER);
-
-        String to = "";
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        to = sharedPref.getString("your_mail",to);
-
-        TextView m = findViewById(R.id.your_mail);
-        //m.setText(to);
-
-        Log.e("mail_test",to);
-        Log.e("mail_test", m+"");
     }
 
     private BroadcastReceiver batchProcessReceiver = new BroadcastReceiver() {

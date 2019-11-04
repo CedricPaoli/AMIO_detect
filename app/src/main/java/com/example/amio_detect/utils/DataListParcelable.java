@@ -1,9 +1,7 @@
-package com.example.amio_detect;
+package com.example.amio_detect.utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.example.amio_detect.utils.Data;
 
 import java.util.ArrayList;
 
