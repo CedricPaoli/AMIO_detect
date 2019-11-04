@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import com.example.amio_detect.ui.notifications.NotificationsFragment;
+import com.example.amio_detect.ui.prefs.PrefsFragment;
 
 public class DataReceiver extends BroadcastReceiver {
     @Override

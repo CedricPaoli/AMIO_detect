@@ -1,14 +1,14 @@
-package com.example.amio_detect.ui.notifications;
+package com.example.amio_detect.ui.prefs;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class PrefsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public PrefsViewModel() {
         mText = new MutableLiveData<>();
         //mText.setValue("This is notifications fragment");
     }

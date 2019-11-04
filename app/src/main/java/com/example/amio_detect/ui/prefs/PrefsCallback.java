@@ -1,6 +1,6 @@
-package com.example.amio_detect.ui.notifications;
+package com.example.amio_detect.ui.prefs;
 
-public interface NotificationCallback {
+public interface PrefsCallback {
 
     /**
      * Un item a été sélectionné dans le fragment

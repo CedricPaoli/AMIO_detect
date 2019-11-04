@@ -34,4 +34,7 @@
     <string name="week_def">Jours correspondants au week-end</string>
     <string name="contact">Information de contact</string>
     <string name="contact_description">Votre mail nous permet de vous prévenir en cas d\'incident</string>
+    <string name="starting_mail_description">Début de l\'heure de notification mail en semaine</string>
+    <string name="week_hours_mail">Heures de notification par mail en semaine</string>
+    <string name="stopping_mail_description">Fin de l\'heure de notification mail en semaine</string>
 </resources>

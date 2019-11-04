@@ -1,17 +1,19 @@
-package com.example.amio_detect.ui.notifications;
+package com.example.amio_detect.ui.prefs;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.example.amio_detect.MainService;
 import com.example.amio_detect.R;
 
 import java.util.Objects;
 
-public class NotificationsFragment extends PreferenceFragmentCompat {
+public class PrefsFragment extends PreferenceFragmentCompat {
     public static final String SERVICES_PREF = "services";
     public static final String NOTIFICATIONS_PREF = "notifications";
     public static final String START_PREF = "start";
@@ -23,6 +25,15 @@ public class NotificationsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
+
+        Preference t = findPreference("your_mail");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String to = "";
+        to = sharedPref.getString("your_mail",to);
+        t.setTitle(to);
+        Preference start = findPreference("start");
+
+
     }
 
     @Override

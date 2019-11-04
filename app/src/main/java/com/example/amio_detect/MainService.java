@@ -10,13 +10,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
 
-import com.example.amio_detect.ui.notifications.NotificationsFragment;
+import com.example.amio_detect.ui.prefs.PrefsFragment;
 import com.example.amio_detect.utils.Data;
 import com.example.amio_detect.utils.GetSensors;
 
@@ -76,16 +77,16 @@ public class MainService extends Service {
         ArrayList<Integer> weekday = new ArrayList<>();
         ArrayList<String> moteActivated = new ArrayList<>();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getApplicationContext()));
-        int from = sharedPref.getInt(NotificationsFragment.START_PREF, 19);
-        int to = sharedPref.getInt(NotificationsFragment.STOP_PREF, 23);
+        int from = sharedPref.getInt(PrefsFragment.START_PREF, 19);
+        int to = sharedPref.getInt(PrefsFragment.STOP_PREF, 23);
 
         c.setTime(new Date());
 
         int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
         boolean isBetween = (to > from && t >= from && t <= to) || (to < from && (t >= from || t <= to));
 
-        for (int i = 0; i < NotificationsFragment.WEEK.length; i++)
-            if (!sharedPref.getBoolean(NotificationsFragment.WEEK[i], false))
+        for (int i = 0; i < PrefsFragment.WEEK.length; i++)
+            if (!sharedPref.getBoolean(PrefsFragment.WEEK[i], false))
                 weekday.add(i);
 
         for (int i = 0; i < list.size(); i++) {
@@ -107,7 +108,7 @@ public class MainService extends Service {
             }
         }
 
-        if(sharedPref.getBoolean(NotificationsFragment.NOTIFICATIONS_PREF, false) && moteActivated.size() > 0) {
+        if(sharedPref.getBoolean(PrefsFragment.NOTIFICATIONS_PREF, false) && moteActivated.size() > 0) {
             String moteActivatedString = moteActivated.get(0);
 
             if (moteActivated.size() > 1)
@@ -115,6 +116,7 @@ public class MainService extends Service {
                     moteActivatedString = moteActivatedString.concat(", " + moteActivated.get(i));
 
             this.sendNotification(this, moteActivatedString);
+            this.sendEmail( moteActivatedString);
         }
     }
 
@@ -137,5 +139,23 @@ public class MainService extends Service {
                 .setSmallIcon(R.drawable.ic_stat_onesignal_default);
 
         NotificationManagerCompat.from(context).notify((int)(System.currentTimeMillis()/1000), builder.build());
+    }
+
+    protected void sendEmail(String moteLabels) {
+        Log.i("Send email", "sending mail");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        try {
+            String to = "";
+            to = sharedPref.getString("your_mail",to);
+            GMailSender sender = new GMailSender("no.reply.amio@gmail.com", "TNCY@2019");
+            sender.sendMail("[AMOI_DETECT][SECURITY NOTIFICATION]",
+                    "This is a notification about the current ligth on.\n the concerned mote are : " + moteLabels,
+                    "no.reply.amio@gmail.com",
+                    to);
+            Log.i("SendMail", "mail sent to : " + to + " || ");
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
     }
 }
