@@ -14,7 +14,7 @@ public class DataReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) && sharedPref.getBoolean(NotificationsFragment.SERVICES_PREF, true))
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) && sharedPref.getBoolean(PrefsFragment.SERVICES_PREF, true))
             context.startService(new Intent(context, MainService.class));
     }
 }
