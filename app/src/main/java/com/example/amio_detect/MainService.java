@@ -31,6 +31,7 @@ import java.util.TimerTask;
 public class MainService extends Service {
     final Handler handler = new Handler();
     final Timer timer = new Timer();
+    private HashMap<String, Data> listMotesLit = new HashMap<>();
 
     public void onCreate() {
         TimerTask task = new TimerTask() {
@@ -71,7 +72,6 @@ public class MainService extends Service {
     }
 
     public void sendNotification(ArrayList<Data> list) {
-        HashMap<String, Data> listMotesLit = new HashMap<>();
         Calendar c = Calendar.getInstance();
         ArrayList<Integer> weekday = new ArrayList<>();
         ArrayList<String> moteActivated = new ArrayList<>();
