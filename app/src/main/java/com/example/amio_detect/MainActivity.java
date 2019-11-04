@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
         IntentFilter mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(LIST_RECEIVER);
-
-        sendEmail();
-        this.startService(new Intent(this, MainService.class)); //A enlever
     }
 
     private BroadcastReceiver batchProcessReceiver = new BroadcastReceiver() {

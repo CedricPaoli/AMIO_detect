@@ -44,7 +44,7 @@ public class MainService extends Service {
             }
         };
 
-        timer.schedule(task, 0, 5000);
+        timer.schedule(task, 0, 20000);
     }
 
     public void onDestroy() {

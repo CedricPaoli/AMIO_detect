@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment implements ListenFromActivity, AsyncR
         if(firstOpening) {
             firstOpening = false;
 
-            if(!sharedPref.getBoolean(NotificationsFragment.SERVICES_PREF, false))
+            if(!sharedPref.getBoolean(NotificationsFragment.SERVICES_PREF, true))
                 this.getData(activity);
         } else this.getData(activity);
 

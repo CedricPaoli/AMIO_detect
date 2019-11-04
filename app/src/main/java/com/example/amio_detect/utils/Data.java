@@ -59,7 +59,7 @@ public class Data implements Parcelable {
     }
 
     public String getLight() {
-        return "Lumiere: " + this.value;
+        return "Lumière: " + this.value;
     }
 
     public Date getRawDate() {
