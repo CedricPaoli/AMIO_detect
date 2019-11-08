@@ -19,6 +19,7 @@ public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider);
     }
 
+    /** Separation entre les items **/
     @Override
     public void onDrawOver(@NonNull Canvas c, RecyclerView parent, @NonNull RecyclerView.State state) {
         int left = parent.getPaddingLeft();

@@ -65,12 +65,13 @@ public class HomeFragment extends Fragment implements ListenFromActivity, AsyncR
         return root;
     }
 
+    /** Executer une asyncTask pour la liste des motes **/
     private void getData(AppCompatActivity activity) {
-        System.out.println(activity);
         GetSensors getSensors = new GetSensors(activity, null);
         getSensors.execute("http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/light1/last");
     }
 
+    /** Mise à jour du fragment Home avec la liste en argument **/
     @Override
     public void reloadRecycle(ArrayList<Data> list) {
         this.load.setVisibility(View.INVISIBLE);
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment implements ListenFromActivity, AsyncR
         else this.noItem.setVisibility(View.INVISIBLE);
     }
 
+    /** Reception du resultat de l'asyncTask **/
     @Override
     public void updateRecyclerView(ArrayList<Data> arrayList) {
         this.reloadRecycle(arrayList);

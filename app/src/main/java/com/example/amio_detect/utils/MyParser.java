@@ -16,6 +16,7 @@ class MyParser {
         dataList = new ArrayList<>();
     }
 
+    /** Lecture du stream et separation des data **/
     ArrayList<Data> readJsonStream(InputStream in) {
         try (JsonReader reader = new JsonReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
             reader.beginObject();
@@ -42,6 +43,7 @@ class MyParser {
         }
     }
 
+    /** Lecture des data pour créer des objets de mote **/
     private Data readData(JsonReader reader) throws IOException {
         Long timestamp = null;
         String label = null;

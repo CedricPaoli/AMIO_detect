@@ -55,7 +55,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         return new MyViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    /** Changement de couleur en fonction de l'état et ajout du numero de salle aux données affichées **/
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int position) {
         Data data = this.listData.get(position);
@@ -82,6 +82,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         }
     }
 
+    /** Mise à jour de la liste à afficher **/
     int updateList(ArrayList<Data> listData) {
         this.listData.clear();
         this.listData.addAll(listData);

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         mIntentFilter.addAction(LIST_RECEIVER);
     }
 
+    /** Reception d'un broadcast de la part du service et lecture de la liste en extra **/
     private BroadcastReceiver batchProcessReceiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
             if (Objects.equals(intent.getAction(), LIST_RECEIVER)) {
@@ -48,10 +49,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
     };
 
+    /** Bind de cette activité avec le fragment **/
     public void setActivityListener(ListenFromActivity activityListener) {
         this.activityListener = activityListener;
     }
 
+    /** Reception du resultat de l'asyncTask **/
     public void updateRecyclerView(ArrayList<Data> list) {
         this.activityListener.reloadRecycle(list);
     }

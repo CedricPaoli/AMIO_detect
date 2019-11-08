@@ -65,6 +65,7 @@ public class MainService extends Service {
         return START_STICKY;
     }
 
+    /** Envoi de la liste mise à jour à l'activité **/
     public void updateList(ArrayList<Data> list) {
         Intent intent = new Intent(MainActivity.LIST_RECEIVER);
         intent.putParcelableArrayListExtra("dataList", list);
@@ -73,6 +74,7 @@ public class MainService extends Service {
         this.sendNotification(list);
     }
 
+    /** Enregistrement dans une liste des motes à notifier **/
     private void sendNotification(ArrayList<Data> list) {
         Calendar c = Calendar.getInstance();
         ArrayList<Integer> weekday = new ArrayList<>();
@@ -142,6 +144,7 @@ public class MainService extends Service {
         return (from < to && from <= time && time <= to) || (from > to && (from <= time || time <= to));
     }
 
+    /** Envoi d'une notification **/
     private void sendNotification(Context context, String moteLabels) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("amio_detect_1", "amio_detect", NotificationManager.IMPORTANCE_HIGH);
@@ -163,6 +166,7 @@ public class MainService extends Service {
         NotificationManagerCompat.from(context).notify((int)(System.currentTimeMillis()/1000), builder.build());
     }
 
+    /** Envoi d'un mail **/
     private void sendEmail(String moteLabels) {
         Log.i("Send email", "sending mail");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);

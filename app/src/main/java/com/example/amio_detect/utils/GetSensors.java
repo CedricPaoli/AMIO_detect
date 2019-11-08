@@ -57,6 +57,7 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
 
                 Log.e("HTTP", "Success");
             }
+        // Erreur HTTP, affichage d'un toast
         } catch (IOException e) {
             Context context = this.weakContext.get();
 
@@ -93,7 +94,7 @@ public class GetSensors extends AsyncTask<String , Void ,String> {
         }
     }
 
-    /** On charge les données récupérées sur la page **/
+    /** On envoi le résultat au service pour les notifications et les mails et on met à jour le fragment si l'application est ouverte **/
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);

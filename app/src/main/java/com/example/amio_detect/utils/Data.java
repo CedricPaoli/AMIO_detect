@@ -74,10 +74,12 @@ public class Data implements Parcelable {
         return "Dernière acquisition: " + simpleDateFormat.format(getRawDate());
     }
 
+    /** On considère que la mote détecte de la lumière à partir de 250 **/
     public boolean isOn() {
         return this.value > 250;
     }
 
+    /** Moins d'une heure avec la dernière date d'acquisition des données **/
     public boolean isAvailable() {
         return System.currentTimeMillis() - this.timestamp < 3600000;
     }
