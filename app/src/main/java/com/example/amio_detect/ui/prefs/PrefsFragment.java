@@ -28,6 +28,7 @@ public class PrefsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
+        // Cette partie du code permet l'affichage de l'aadresse  mail entrée dans les settings pour qu'elle soit directement visible
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getContext()));
         String to = sharedPref.getString("your_mail", "");
         Objects.requireNonNull(findPreference("your_mail")).setTitle(to);
