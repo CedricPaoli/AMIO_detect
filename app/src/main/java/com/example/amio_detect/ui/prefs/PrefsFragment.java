@@ -34,6 +34,7 @@ public class PrefsFragment extends PreferenceFragmentCompat {
         Objects.requireNonNull(findPreference("your_mail")).setTitle(to);
     }
 
+    /** On arrete le service et on redemarre quand on clique sur le bouton de preference **/
     @Override
     public boolean onPreferenceTreeClick (Preference preference) {
         String key = preference.getKey();
